@@ -1,6 +1,6 @@
 # Cypress E2E Automation
 
-This project contains Cypress end-to-end specs for the public [CURA Healthcare Service demo](https://katalon-demo-cura.herokuapp.com) and [Swag Labs](https://www.saucedemo.com/). The specs cover CURA appointment flows and a Swag Labs product checkout.
+This project contains Cypress end-to-end specs for the public [CURA Healthcare Service demo](https://katalon-demo-cura.herokuapp.com), [Swag Labs](https://www.saucedemo.com/), and [Thinking Tester Contact List app](https://thinking-tester-contact-list.herokuapp.com/). The specs cover appointment booking, product checkout, and contact management.
 
 ## Requirements
 
@@ -24,16 +24,17 @@ Open Cypress:
 npx cypress open
 ```
 
-Run the project-specific specs (CURA and Swag Labs):
+Run the project-specific specs:
 
 ```bash
 npx cypress run --spec "cypress/e2e/code/*.cy.js"
 ```
 
-Run only the Swag Labs checkout:
+Run an individual spec:
 
 ```bash
 npx cypress run --spec "cypress/e2e/code/SwagLabs.cy.js"
+npx cypress run --spec "cypress/e2e/code/ContactList.cy.js"
 ```
 
 Run all specs, including the Cypress examples:
@@ -47,14 +48,15 @@ npx cypress run
 - [`cypress/e2e/code/c.cy.js`](cypress/e2e/code/c.cy.js) books a CURA appointment using the public demo credentials `John Doe` and `ThisIsNotAPassword`.
 - [`cypress/e2e/code/cura.cy.js`](cypress/e2e/code/cura.cy.js) contains additional CURA checks, including appointment confirmation, comment verification, and a screenshot. It uses the same public demo credentials.
 - [`cypress/e2e/code/SwagLabs.cy.js`](cypress/e2e/code/SwagLabs.cy.js) logs in with the public `standard_user` / `secret_sauce` account, adds the Sauce Labs Backpack and Fleece Jacket to the cart, completes checkout, checks the order confirmation, and clicks the order PDF control.
+- [`cypress/e2e/code/ContactList.cy.js`](cypress/e2e/code/ContactList.cy.js) creates a unique account, adds two contacts with profile and address details, verifies both in the contact list, logs out and back in, and confirms they persist. It uses generated email addresses so each run has its own account and contacts.
 
-The CURA specs use the `baseUrl` from `cypress.config.js`. The Swag Labs spec visits its site directly. The appointment details are set in each spec; `cura.cy.js` uses `30/09/2026` as its visit date.
+The CURA specs use the `baseUrl` from `cypress.config.js`. The Swag Labs and Contact List specs visit their sites directly. The appointment details are set in each spec; `cura.cy.js` uses `30/09/2026` as its visit date.
 
 ## Reports and artifacts
 
 Cypress is configured to use the Mochawesome reporter. Its HTML report output directory is `cypress/report/mochawesome-report/` (the reporter overwrites previous output). The repository also contains a CURA run summary at [`cypress/report/CURA-appointment-report.md`](cypress/report/CURA-appointment-report.md).
 
-Screenshots are saved under `cypress/screenshots/`; the specs capture `finished-appointment` and `checkout-info`. Swag Labs also downloads an order PDF to `cypress/downloads/`.
+Screenshots are saved under `cypress/screenshots/`; the specs capture `finished-appointment`, `checkout-info`, and `final-contact-list`. Swag Labs also downloads an order PDF to `cypress/downloads/`.
 
 ## Project layout
 
@@ -66,7 +68,8 @@ Screenshots are saved under `cypress/screenshots/`; the specs capture `finished-
 │   │   ├── code/
 │   │   │   ├── c.cy.js
 │   │   │   ├── cura.cy.js
-│   │   │   └── SwagLabs.cy.js
+│   │   │   ├── SwagLabs.cy.js
+│   │   │   └── ContactList.cy.js
 │   │   ├── 1-getting-started/
 │   │   └── 2-advanced-examples/
 │   ├── downloads/
@@ -79,4 +82,3 @@ Screenshots are saved under `cypress/screenshots/`; the specs capture `finished-
 ```
 
 The `baseUrl` is `https://katalon-demo-cura.herokuapp.com`. Component testing is configured with Next.js and webpack. The demo sites are third-party services, so their availability and page changes can affect these specs.
-# Cypress_QA_1

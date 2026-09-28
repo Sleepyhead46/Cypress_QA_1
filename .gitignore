@@ -2,10 +2,7 @@
 node_modules/
 
 # Cypress generated artifacts
-cypress/screenshots/
-cypress/videos/
-cypress/downloads/
-cypress/report/
+
 
 # Local environment files
 .env
